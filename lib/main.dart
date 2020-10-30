@@ -5,17 +5,12 @@ void main() {
   runApp(MyApp());
 }
 
-randomOne() {
+generateRandom() {
   var rng = new Random();
   final int firstRandomNumber = rng.nextInt(100);
   return firstRandomNumber;
 }
 
-randomTwo() {
-  var rng = new Random();
-  final int secondRandomNumber = rng.nextInt(100);
-  return secondRandomNumber;
-}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -50,11 +45,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int first = randomOne();
-  int second = randomTwo();
+  int first;
+  int second;
   String resultOnScreen;
   bool check=true;
   String checkScreen=" ";
+  TextEditingController resultTextController= new TextEditingController();
   result() {
     int result = first + second;
     return result;
@@ -62,26 +58,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void twoRandom() {
     setState(() {
-      first = randomOne();
-      second = randomTwo();
+      first = generateRandom();
+      second = generateRandom();
     });
   }
-  void checkChangeTrue() {
+  checkChange(bool result){
     setState(() {
-      check=true;
-      checkScreen="True";
+      check=result;
+
+      if(result){
+        checkScreen="🎉 True";
+        resultTextController.clear();
+        twoRandom();
+      }else{
+        checkScreen="😞 False";
+      }
     });
   }
-
-  void checkChangeFalse() {
-    setState(() {
-      check=false;
-      checkScreen="False";
-    });
+ @override
+  void initState() {
+     twoRandom();
+     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -114,19 +115,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.all(8.0),
                 splashColor: Colors.blueAccent,
                 onPressed: () {
+
                   int result = first + second;
                   print(result);
-                  twoRandom();
+
                   print("new first" + first.toString());
                   print("new second" + second.toString());
                   int resultOnScreenInteger = int.parse(resultOnScreen);
-                  if(result==resultOnScreenInteger){
-                    checkChangeTrue();
-                  }
-                  else{
-                    checkChangeFalse();
-                  }
-                },
+
+                  checkChange(result==resultOnScreenInteger);
+
+                  },
                 child: Text(
                   "Check",
                   style: TextStyle(fontSize: 20.0),
@@ -137,8 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.only(left:150,right:150),
             child: TextField(
+                controller: resultTextController ,
                 onChanged: (String onScreen){
-                resultOnScreen=onScreen;
+                resultOnScreen = onScreen;
                 },
               keyboardType: TextInputType.number,
               maxLength: 3,

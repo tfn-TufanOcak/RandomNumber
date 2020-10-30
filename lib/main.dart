@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return result;
   }
 
-  void twoRandom() {
+  void twoRandoms() {
     setState(() {
       first = generateRandom();
       second = generateRandom();
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if(result){
         checkScreen="🎉 True";
         resultTextController.clear();
-        twoRandom();
+        twoRandoms();
       }else{
         checkScreen="😞 False";
       }
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
  @override
   void initState() {
-     twoRandom();
+     twoRandoms();
      super.initState();
   }
   @override

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "763781950255",
+    "firebase_url": "https://calculaterandomly.firebaseio.com",
+    "project_id": "calculaterandomly",
+    "storage_bucket": "calculaterandomly.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763781950255:android:7d8e08179996b58b660fda",
+        "android_client_info": {
+          "package_name": "com.tfn.random_calculate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763781950255-h73880qktlbd347e6iamarar87coi0hb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwSm-R9NVc6YNBwR3jbA7gyV3f50blCOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763781950255-h73880qktlbd347e6iamarar87coi0hb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

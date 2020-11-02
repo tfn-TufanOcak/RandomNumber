@@ -1,7 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-void main() {
+import 'login.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -51,6 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
   bool check=true;
   String checkScreen=" ";
   TextEditingController resultTextController= new TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   result() {
     int result = first + second;
     return result;
@@ -77,16 +85,38 @@ class _MyHomePageState extends State<MyHomePage> {
   }
  @override
   void initState() {
+   if (_auth.currentUser == null) {
+     // user not logged ==> Login Screen
+     WidgetsBinding.instance.addPostFrameCallback((_) async {
+       Navigator.pushAndRemoveUntil(context,
+           MaterialPageRoute(builder: (_) => LoginScreen()), (route) => false);
+     });
+   } else {
      twoRandoms();
-     super.initState();  
+   }
+     super.initState();
+
   }
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+        actions: [
+
+            FlatButton.icon(
+                icon: Icon(
+                  Icons.exit_to_app,
+                  color: Colors.white,
+                  size: 27,
+                ),
+                label: Text(""),
+                onPressed:  () async {
+                   await _auth.signOut();
+                   Navigator.of(context)
+                       .pushNamedAndRemoveUntil('/', (route) => false);
+                })
+        ],
         title: Text(widget.title),
       ),
       body: Column(

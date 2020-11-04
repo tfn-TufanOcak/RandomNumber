@@ -7,11 +7,15 @@ class SocialLogin extends StatelessWidget {
   final AuthService auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-       LoginButton(
-        icon: FontAwesomeIcons.google,
-        loginMethod: auth.googleSignIn,
-      )
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+
+      Image.asset('assets/LogoApp.png', width: 180, height: 180,),
+         Center(
+           child: LoginButton(
+            icon: FontAwesomeIcons.google,
+            loginMethod: auth.googleSignIn,
+      ),
+         ),
     ]);
   }
 }

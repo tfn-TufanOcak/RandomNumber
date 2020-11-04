@@ -28,8 +28,8 @@ class LoginScreenState extends State<LoginScreen> {
         children: [
 
           SingleChildScrollView(
-            padding: EdgeInsets.only(top: 300),
-            child:  SocialLogin()
+            padding: EdgeInsets.only(top: 200),
+            child: SocialLogin()
           ),
 
         ],
